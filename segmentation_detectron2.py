@@ -1,17 +1,13 @@
 if __name__ == '__main__':
     import os
     import cv2
-    import torch
-    import numpy as np
-    from PIL import Image
-
     from detectron2 import model_zoo
     from detectron2.config import get_cfg
     from detectron2.engine import DefaultPredictor
     from detectron2.data import MetadataCatalog
     from detectron2.utils.visualizer import Visualizer
-    score_threshold = 0.50
 
+    score_threshold = 0.45
     def sign_segmentation(instances, metadata, im, prob_threshold=score_threshold, segm_size=64):
         '''
         1) checks for the presence of "street_sign" classes according to a given probability threshold;
@@ -37,58 +33,56 @@ if __name__ == '__main__':
 
         return segmented_signs
 
-    # Create config
-    cfg = get_cfg()
+# Create config
+cfg = get_cfg()
+# Pre-trained model that can detect road signs
+# https://dl.fbaipublicfiles.com/detectron2/LVISv0.5-InstanceSegmentation/mask_rcnn_X_101_32x8d_FPN_1x/144219108/model_final_5e3439.pkl
+cfg.merge_from_file(model_zoo.get_config_file("LVISv0.5-InstanceSegmentation/mask_rcnn_X_101_32x8d_FPN_1x.yaml"))
+cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("LVISv0.5-InstanceSegmentation/mask_rcnn_X_101_32x8d_FPN_1x.yaml")
 
-    # https://dl.fbaipublicfiles.com/detectron2/LVISv0.5-InstanceSegmentation/mask_rcnn_X_101_32x8d_FPN_1x/144219108/model_final_5e3439.pkl
-    cfg.merge_from_file(model_zoo.get_config_file("LVISv0.5-InstanceSegmentation/mask_rcnn_X_101_32x8d_FPN_1x.yaml"))
-    cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("LVISv0.5-InstanceSegmentation/mask_rcnn_X_101_32x8d_FPN_1x.yaml")
+# Probability threshold for the sought classes
+cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = score_threshold
 
-    # Probability threshold for the sought classes
-    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = score_threshold
+# Information about object classes and their labels
+metadata = MetadataCatalog.get(cfg.DATASETS.TRAIN[0])
 
-    # Information about object classes and their labels
-    metadata = MetadataCatalog.get(cfg.DATASETS.TRAIN[0])
+# Create predictor
+cfg.MODEL.DEVICE = "cpu"
+predictor = DefaultPredictor(cfg)
 
-    # Create predictor
-    cfg.MODEL.DEVICE = "cpu"
-    predictor = DefaultPredictor(cfg)
+test_images = os.listdir('1. segmentation_image/test_images')
+for file in test_images:
+    # Load image
+    image_url = os.path.join('1. segmentation_image/test_images/', file)
+    image = cv2.imread(image_url)
 
+    # Get prediction
+    outputs = predictor(image)
 
-    files = os.listdir('1. segmentation_image/1.test_images')
-    for file in files:
-        # Load image
-        image_url = os.path.join('1. segmentation_image/1.test_images/', file)
-        image = cv2.imread(image_url)
+    v = Visualizer(image, metadata, scale=1.2)
+    # out = v.draw_instance_predictions(outputs["instances"].to("cpu"))
 
-        # Get prediction
-        outputs = predictor(image)
+    # Filter the drawn instances to include only 'street_sign'
+    instances_filtered = outputs["instances"].to("cpu")
+    instances_filtered = instances_filtered[
+        instances_filtered.pred_classes == metadata.thing_classes.index('street_sign')
+    ]
 
-        v = Visualizer(image, metadata, scale=1.2)
-        # out = v.draw_instance_predictions(outputs["instances"].to("cpu"))
+    out = v.draw_instance_predictions(instances_filtered)
+    out_image = out.get_image()
 
-        # Filter the drawn instances to include only 'street_sign'
-        instances_filtered = outputs["instances"].to("cpu")
-        instances_filtered = instances_filtered[
-            instances_filtered.pred_classes == metadata.thing_classes.index('street_sign')
-        ]
+    # Save segmented image
+    cv2.imwrite(f"1. segmentation_image/segmented_images/!X_101_{file}", out_image)
 
-        out = v.draw_instance_predictions(instances_filtered)
+    # Extract the predicted instances (shards) from outputs:
+    instances = outputs["instances"].to("cpu")
 
-        out_image = out.get_image()
+    # Get segmented signs
+    segmented_signs = sign_segmentation(instances, metadata, image)
 
-        # Save segmented image
-        cv2.imwrite(f"segmented_images/!X_101_{file}", out_image)
+    # Save segmented signs
+    for i, sign_segment in enumerate(segmented_signs):
+        os.makedirs(f'1. segmentation_image/segmented_sign/{file}', exist_ok=True)
+        cv2.imwrite(f"1. segmentation_image/segmented_sign/{file}/sign_{i}.png", sign_segment)
 
-        # Extract the predicted instances (shards) from outputs:
-        instances = outputs["instances"].to("cpu")
-
-        # Get segmented signs
-        segmented_signs = sign_segmentation(instances, metadata, image)
-
-        # Save segmented signs
-        for i, sign_segment in enumerate(segmented_signs):
-            os.makedirs(f'segmented_sign/{file}', exist_ok=True)
-            cv2.imwrite(f"segmented_sign/{file}/sign_{i}.png", sign_segment)
-
-        print(f'{len(segmented_signs)} traffic signs detected in {file}')
+    print(f'{len(segmented_signs)} traffic signs detected in {file}')
