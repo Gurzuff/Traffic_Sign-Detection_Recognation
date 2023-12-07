@@ -1,6 +1,6 @@
 # Traffic sign recognation - project in progress
 https://en.wikipedia.org/wiki/Vienna_Convention_on_Road_Signs_and_Signals
-![](readme_images/Vienna Convention.png)
+![](readme_images/Vienna_Convention.png)
 
 ## Data
 Датасэт для обучения был создан на основе:
@@ -10,7 +10,7 @@ https://www.kaggle.com/datasets/daniildeltsov/traffic-signs-gtsrb-plus-162-custo
 
 
 https://en.wikipedia.org/wiki/Traffic_signs_in_post-Soviet_states
-![](readme_images/Traffic signs in post-Soviet states.png)
+![](readme_images/Traffic_signs_in_post_Soviet_states.png)
 
 ### Segmentation - Detectron2
 https://github.com/facebookresearch/detectron2/blob/main/MODEL_ZOO.md
