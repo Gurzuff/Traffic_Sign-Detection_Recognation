@@ -1,6 +1,6 @@
 # Traffic sign recognation - project in progress
 https://en.wikipedia.org/wiki/Vienna_Convention_on_Road_Signs_and_Signals
-![Vienna Convention.png](readme_images/Vienna Convention.png)
+![](_readme_images/Vienna Convention.png)
 
 ## Data
 Датасэт для обучения был создан на основе:
@@ -10,10 +10,25 @@ https://www.kaggle.com/datasets/daniildeltsov/traffic-signs-gtsrb-plus-162-custo
 
 
 https://en.wikipedia.org/wiki/Traffic_signs_in_post-Soviet_states
-![Traffic signs in post-Soviet states.png](readme_images/Traffic signs in post-Soviet states.png)
+![](_readme_images/Traffic signs in post-Soviet states.png)
 
 ### Segmentation - Detectron2
 https://github.com/facebookresearch/detectron2/blob/main/MODEL_ZOO.md
 pip install 'git+https://github.com/facebookresearch/detectron2.git'
+![](_readme_images/Segmented_Image.PNG)
 
 ("LVISv0.5-InstanceSegmentation/mask_rcnn_X_101_32x8d_FPN_1x.yaml")
+
+## Training and evaluation
+![](_readme_images/metrics_36M_64x64_80ep_log.png)
+
+* описание задачи;
+* описание продукта, который решает задачу;
+* описание окружения (requirements/Docker/etc) с инструкциями установки ;
+* скрипты для получения данных и ссылка на данные с разметкой;
+* пайплайны ML экспериментов с инструкциями воспроизведения (работа с данными, обучение, валидация, визуализация графиков/дашбордов);
+* скрипты продукта с инструкциями полного запуска;
+* ссылка на веса моделей, которые используются в проде продукта;
+* демки: схемы, картинки, гифки;
+* лицензия;
+* всё, что считаете полезным для вас/других.

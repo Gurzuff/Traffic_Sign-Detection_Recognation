@@ -5,34 +5,42 @@ if __name__ == '__main__':
     import pandas as pd
     import seaborn as sns
     import matplotlib.pyplot as plt
-    from keras import backend as K
-    from keras.models import load_model
+
+    from Training_model.mymodel import MyModel
+
     from keras.preprocessing.image import ImageDataGenerator
     from sklearn.metrics import confusion_matrix, classification_report
     from sklearn.metrics import accuracy_score, f1_score
 
+# Dataset of images
+PATH_root = 'E:\DataSets\Traffic Sign - Detection&Recognation\Traffic_Sign - 200 classes'
+PATH_train = os.path.join(PATH_root, 'Train')
+# Number of road sign classes
+CLASSES = len(os.listdir(PATH_train))
+# Set parameters for shape of the resized image
+KERNEL = 64
+input_shape = (None, KERNEL, KERNEL, 3)
+
 # Load test dataframe
-test_data = pd.read_csv('2. training_model\split_dfs\df_test.csv')
+test_data = pd.read_csv('Training_model\split_dfs\df_test.csv')
 
 # Load test generator parameters
-with open('2. training_model/test_generator_params.pkl', 'rb') as file:
+with open(r'Training_model\test_generator_params.pkl', 'rb') as file:
     test_generator_params = pickle.load(file)
 
 # Create test generator
 test_datagen = ImageDataGenerator(rescale=1./255)
 test_generator = test_datagen.flow_from_dataframe(**test_generator_params)
 
-# Load the model and make prediction
-name_model = 'model_9M_new_64_50'
-root_model = '2. training_model/trained_models_tf'
-model = load_model(os.path.join(root_model, name_model),
-                   custom_objects={'f1_score': f1_score,
-                                   'recall_': recall_,
-                                   'precision_': precision_}
-                   )
-predictions = model.predict(test_generator)
+# Load the model and pre-trained weights
+name_model = 'model_36M_64x64_80ep'
+root_model = 'Training_model/trained_models_tf'
+model = MyModel(CLASSES, input_shape)
+model.build(input_shape)
+model.load_weights('Training_model/trained_models_tf/best_weights.hdf5')
 
 # Evaluating metrics
+predictions = model.predict(test_generator)
 y_true = test_data.class_id.values
 print('y_true:', y_true)
 y_pred = np.argmax(predictions, axis=1)
@@ -47,10 +55,10 @@ class_totals = np.sum(c_m, axis=1)   # Total number of objects in each class
 matrix_percent = (c_m.T / class_totals).T * 100   # Converting Matrix to percentage
 
 # Create folder
-if os.path.exists(f'res_conf_matrix/{name_model}'):
+if os.path.exists(f'Testing_model/res_conf_matrix/{name_model}'):
     pass
 else:
-    os.makedirs(f'res_conf_matrix/{name_model}')
+    os.makedirs(f'Testing_model/res_conf_matrix/{name_model}')
 
 # Build and save several smaller confusion matrix
 cm_size = 50    # confusion matrix on 'cm_size' classes
@@ -68,5 +76,5 @@ for i in range(4):
     plt.xlabel('Predicted')
     plt.ylabel('True')
     plt.title(f'Confusion Matrix part_{i+1}')
-    plt.savefig(f'3. testing_model/res_conf_matrix/{name_model}/Confusion Matrix part_{i+1}')
+    plt.savefig(f'Testing_model/res_conf_matrix/{name_model}/Confusion Matrix part_{i+1}')
     i += cm_size
