@@ -50,10 +50,10 @@ metadata = MetadataCatalog.get(cfg.DATASETS.TRAIN[0])
 cfg.MODEL.DEVICE = "cpu"
 predictor = DefaultPredictor(cfg)
 
-test_images = os.listdir('1. segmentation_image/test_images')
+test_images = os.listdir('Segmentation_image/test_images')
 for file in test_images:
     # Load image
-    image_url = os.path.join('1. segmentation_image/test_images/', file)
+    image_url = os.path.join('Segmentation_image/test_images/', file)
     image = cv2.imread(image_url)
 
     # Get prediction
@@ -72,7 +72,7 @@ for file in test_images:
     out_image = out.get_image()
 
     # Save segmented image
-    cv2.imwrite(f"1. segmentation_image/segmented_images/!X_101_{file}", out_image)
+    cv2.imwrite(f"Segmentation_image/segmented_images/!X_101_{file}", out_image)
 
     # Extract the predicted instances (shards) from outputs:
     instances = outputs["instances"].to("cpu")
@@ -82,7 +82,7 @@ for file in test_images:
 
     # Save segmented signs
     for i, sign_segment in enumerate(segmented_signs):
-        os.makedirs(f'1. segmentation_image/segmented_sign/{file}', exist_ok=True)
-        cv2.imwrite(f"1. segmentation_image/segmented_sign/{file}/sign_{i}.png", sign_segment)
+        os.makedirs(f'Segmentation_image/segmented_sign/{file}', exist_ok=True)
+        cv2.imwrite(f"Segmentation_image/segmented_sign/{file}/sign_{i}.png", sign_segment)
 
     print(f'{len(segmented_signs)} traffic signs detected in {file}')

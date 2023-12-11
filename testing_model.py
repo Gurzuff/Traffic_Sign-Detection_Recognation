@@ -33,16 +33,16 @@ test_datagen = ImageDataGenerator(rescale=1./255)
 test_generator = test_datagen.flow_from_dataframe(**test_generator_params)
 
 # Load the model and pre-trained weights
-name_model = 'model_36M_64x64_80ep'
-root_model = 'Training_model/trained_models_tf'
 model = MyModel(CLASSES, input_shape)
 model.build(input_shape)
-model.load_weights('Training_model/trained_models_tf/best_weights.hdf5')
+name_weight = 'best_weights'
+# root_weight = 'Training_model/trained_models_tf'
+model.load_weights(f'Training_model/trained_models_tf/{name_weight}.hdf5')
 
 # Evaluating metrics
-predictions = model.predict(test_generator)
 y_true = test_data.class_id.values
 print('y_true:', y_true)
+predictions = model.predict(test_generator)
 y_pred = np.argmax(predictions, axis=1)
 print('y_pred:', y_pred)
 scores = accuracy_score(y_true, y_pred)
@@ -55,10 +55,10 @@ class_totals = np.sum(c_m, axis=1)   # Total number of objects in each class
 matrix_percent = (c_m.T / class_totals).T * 100   # Converting Matrix to percentage
 
 # Create folder
-if os.path.exists(f'Testing_model/res_conf_matrix/{name_model}'):
+if os.path.exists(f'Testing_model/res_conf_matrix/{name_weight}'):
     pass
 else:
-    os.makedirs(f'Testing_model/res_conf_matrix/{name_model}')
+    os.makedirs(f'Testing_model/res_conf_matrix/{name_weight}')
 
 # Build and save several smaller confusion matrix
 cm_size = 50    # confusion matrix on 'cm_size' classes
@@ -76,5 +76,5 @@ for i in range(4):
     plt.xlabel('Predicted')
     plt.ylabel('True')
     plt.title(f'Confusion Matrix part_{i+1}')
-    plt.savefig(f'Testing_model/res_conf_matrix/{name_model}/Confusion Matrix part_{i+1}')
+    plt.savefig(f'Testing_model/res_conf_matrix/{name_weight}/Confusion Matrix part_{i+1}')
     i += cm_size

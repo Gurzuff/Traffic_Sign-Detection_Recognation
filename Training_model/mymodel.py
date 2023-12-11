@@ -1,7 +1,14 @@
 # models/mymodel.py
 
 import tensorflow as tf
+from keras.callbacks import Callback
 from keras.layers import Conv2D, BatchNormalization, MaxPooling2D, Dropout, Flatten, Dense
+
+class MyCallback(Callback):
+    def on_epoch_end(self, epoch, logs={}):
+        if (logs.get('val_accuracy') >= 0.9995):
+            print('\nReached 99.95% accuracy!')
+            self.model.stop_training = True
 
 class MyModel(tf.keras.Model):
     def __init__(self, classes, input_shape):

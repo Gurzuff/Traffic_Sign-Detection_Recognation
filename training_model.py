@@ -5,12 +5,16 @@ if __name__ == '__main__':
     import matplotlib.pyplot as plt
 
     from Training_model.mymodel import MyModel
+    from Training_model.mymodel import MyCallback
 
     import tensorflow as tf
     from keras.preprocessing.image import ImageDataGenerator
     from keras.optimizers import Adam, RMSprop
     from keras.callbacks import Callback, EarlyStopping, ModelCheckpoint, ReduceLROnPlateau
     from sklearn.model_selection import train_test_split
+
+# Check GPU available
+print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
 
 # Dataset of images
 PATH_root = 'E:\DataSets\Traffic Sign - Detection&Recognation\Traffic_Sign - 200 classes'
@@ -28,9 +32,6 @@ KERNEL = 64
 target_size = (KERNEL, KERNEL)
 input_shape = (None, KERNEL, KERNEL, 3)
 
-# Check GPU available
-print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
-
 # DF [image_paths, class_id]
 images_path_list = []
 for root, dirs, imgs in os.walk(PATH_train):
@@ -40,12 +41,13 @@ for root, dirs, imgs in os.walk(PATH_train):
             PATH_image = os.path.join(subdir, img)
             images_path_list.append((PATH_image, int(subdir)))
 df_road_sign = pd.DataFrame(images_path_list, columns=['img_path', 'class_id'])
+print(f'Total number of images in dataset: {df_road_sign.shape[0]}')
 
 # Split data: train, valid, test
-train_data, temp_data = train_test_split(df_road_sign, test_size=0.3, random_state=SEED,
-                                         stratify=df_road_sign['class_id'], shuffle=True)
-valid_data, test_data = train_test_split(temp_data, test_size=0.5, random_state=SEED,
-                                         stratify=temp_data['class_id'], shuffle=True)
+train_data, temp_data = train_test_split(df_road_sign, test_size=0.3, shuffle=True, random_state=SEED,
+                                         stratify=df_road_sign['class_id'])
+valid_data, test_data = train_test_split(temp_data, test_size=0.5, shuffle=True, random_state=SEED,
+                                         stratify=temp_data['class_id'])
 print(f'train_data={train_data.shape[0]} img, valid_data={valid_data.shape[0]} img, test_data={test_data.shape[0]} img')
 
 # Save DFs
@@ -112,19 +114,22 @@ total_params_M = round(total_params/1e6)
 print(f"Total number of parameters: {total_params_M} millions")
 
 # Calback: Reduce LR
-reduceLROnPlat = ReduceLROnPlateau(monitor='val_loss', mode='min',     # 'val_accuracy', 'max',
-                                   factor=0.5, patience=3, verbose=1,  # 0.7, 2
+reduceLROnPlat = ReduceLROnPlateau(monitor='val_accuracy', mode='max',   # val_loss
+                                   factor=0.5, patience=3, verbose=1,
                                    cooldown=0, min_lr=1e-8)
 
 # Calback: Best weights
-weight_path = "Training_model/trained_models_tf/best_weights.hdf5"
+name_weight = f'model_{total_params_M}M_{KERNEL}x{KERNEL}'
+weight_path = f'Training_model/trained_models_tf/{name_weight}.hdf5'
 checkpoint = ModelCheckpoint(weight_path, monitor='val_accuracy', mode='max',
                              verbose=1, save_best_only=True, save_weights_only=True)
 
 # Calback: EarlyStopping
-earlystop = EarlyStopping(monitor="val_loss", mode="min", verbose=2, patience=12)
+earlystop = EarlyStopping(monitor="val_loss", mode="min", verbose=2, patience=15)
+# Stop when accuracy reaches 99.9%
+my_earlystop = MyCallback()
 
-callbacks_list = [checkpoint, reduceLROnPlat, earlystop]
+callbacks_list = [checkpoint, reduceLROnPlat, earlystop, my_earlystop]
 
 # Model compiling
 LR = 1e-4
@@ -133,7 +138,7 @@ model.compile(loss="sparse_categorical_crossentropy",
               metrics=['accuracy'])
 
 # Model training
-EPOCHS = 80
+EPOCHS = 99
 STEPS_train = 64
 STEPS_valid = 32
 history = model.fit(train_generator,
@@ -145,13 +150,9 @@ history = model.fit(train_generator,
                     verbose=1)
 
 # Evaluate the model on the test data
+model.load_weights(f'Training_model/trained_models_tf/{name_weight}.hdf5')
 test_results = model.evaluate(test_generator)
 print('Model evaluate: [Loss, Accuracy] =', test_results)
-
-# Save model with best weights
-name_model = f'model_{total_params_M}M_{KERNEL}x{KERNEL}_{EPOCHS}ep'
-model.load_weights(f'Training_model/trained_models_tf/{name_model}.hdf5')
-# model.save(f'Training_model/trained_models_tf/{name_model}', save_format='tf')
 
 # Build plot accuracy and loss by history
 acc, val_acc = history.history['accuracy'], history.history['val_accuracy']
@@ -186,5 +187,10 @@ axs[2].legend()
 axs[2].set_yscale('log')
 
 # Save the figure
-plt.savefig(f'Training_model/res_metrics_png/metrics_{total_params_M}M_{KERNEL}x{KERNEL}_{EPOCHS}ep_log.png')
+plt.savefig(f'Training_model/res_metrics/metrics_{total_params_M}M_{KERNEL}k_{EPOCHS}ep.png')
 plt.show()
+
+# # Save model with best weights
+# name_model = f'model_{total_params_M}M_{KERNEL}x{KERNEL}_{EPOCHS}ep'
+# model.load_weights(f'Training_model/trained_models_tf/{name_model}.hdf5')
+# model.save(f'Training_model/trained_models_tf/{name_model}', save_format='tf')
