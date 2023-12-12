@@ -1,5 +1,8 @@
-# Traffic sign recognition (Pet project - in progress)
+# Traffic sign recognition (... in progress ...)
 The task is to recognize and classify road signs from a general image.
+
+![](readme_images/Figure_1.png)
+
 Road signs used in post-Soviet countries were chosen as the target type.
 
 More than 95% of road signs in post-Soviet countries are identical, so you can use this model for any of these countries 
@@ -43,7 +46,7 @@ For training, validation and testing, the dataset was divided in a stratified wa
 ![](readme_images/metrics_36M_64x64_80ep_log.png)
 
 
-### Segmentation
+## Segmentation
 The [Detectron2]((https://github.com/facebookresearch/detectron2/blob/main/MODEL_ZOO.md)) 
 (from facebookresearch) was used to segment road signs from general images.
 

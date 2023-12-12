@@ -72,7 +72,7 @@ for file in test_images:
     out_image = out.get_image()
 
     # Save segmented image
-    cv2.imwrite(f"Segmentation_image/segmented_images/!X_101_{file}", out_image)
+    cv2.imwrite(f"Segmentation_image/segmented_images/{file}", out_image)
 
     # Extract the predicted instances (shards) from outputs:
     instances = outputs["instances"].to("cpu")
