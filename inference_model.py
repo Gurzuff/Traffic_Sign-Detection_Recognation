@@ -32,7 +32,7 @@ def final_image(img_segmented, name_img, y_pred, y_prob):
         ax_small.axis('off')
 
     # Draw images from folder "PATH_meta" in the second row
-    low_quality_img = Image.open('Readme_images/Low_quality.png')
+    low_quality_img = Image.open('readme_images/Low_quality.png')
     for sign_class, sign_prob, i in zip(y_pred, y_prob, range(len(y_pred), 2 * len(y_pred))):
         sign_name = df_classes.sign_name[df_classes.sign_class == sign_class].values
         ax_small = plt.subplot(gs_right[i])

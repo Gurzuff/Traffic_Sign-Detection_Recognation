@@ -1,7 +1,7 @@
 # Traffic sign recognition (... in progress ...)
 The task is to recognize and classify road signs from a general image.
 
-![](Readme_images/Russia-2.JPG)
+![](readme_images/Russia-2.JPG)
 
 Road signs used in post-Soviet countries were chosen as the target type.
 
@@ -9,7 +9,7 @@ More than 95% of road signs in post-Soviet countries are identical, so you can u
 (Armenia, Azerbaijan, Belarus, Estonia, Georgia, Kazakhstan, Kyrgyzstan, Latvia, Lithuania, Moldova, Russia, Tajikistan, Turkmenistan, Ukraine and Uzbekistan)
 
 **More details in [Wikipedia](https://en.wikipedia.org/wiki/Traffic_signs_in_post-Soviet_states)**
-![](Readme_images/Traffic_signs_in_post_Soviet_states.png)
+![](readme_images/Traffic_signs_in_post_Soviet_states.png)
 
 ## Project Structure
 - **EDA.ipynb**: Jupyter notebook analyzing the dataset
@@ -36,14 +36,14 @@ and vice versa - simple and uniform form on the other hand.
 
 **More details in [EDA.ipynb](EDA.ipynb)**
 
-![](Readme_images/Class_numbers.png)
+![](readme_images/Class_numbers.png)
 
 ## Evaluation Metrics
 For training, validation and testing, the dataset was divided in a stratified way (70/15/15): [Training_model/split_dfs]()
 * pre-trained weights: [Training_model/trained_models_tf/](Training_model/trained_models_tf/best_weights.hdf5);
 * chart metrics: [Training_model/res_metrics/]()
 
-![](Readme_images/metrics_36M_64x64_80ep_log.png)
+![](readme_images/metrics_36M_64x64_80ep_log.png)
 
 
 ## Segmentation
@@ -52,7 +52,7 @@ The [Detectron2]((https://github.com/facebookresearch/detectron2/blob/main/MODEL
 
 * pip install "git+https://github.com/facebookresearch/detectron2.git"
 * The pre-trained weights: [detectron2/LVISv0.5-InstanceSegmentation/mask_rcnn_X_101_32x8d_FPN_1x/](https://dl.fbaipublicfiles.com/detectron2/LVISv0.5-InstanceSegmentation/mask_rcnn_X_101_32x8d_FPN_1x/144219108/model_final_5e3439.pkl)
-![](Readme_images/Segmented_Image.png)
+![](readme_images/Segmented_Image.png)
 
 
 ## Environment
@@ -61,7 +61,7 @@ For training on a video card, I used [tensorflow-gpu==2.10.0](https://www.tensor
    * [cuDNN](https://developer.nvidia.com/rdp/cudnn-archive)
    * [CUDA](https://developer.nvidia.com/cuda-toolkit-archive)
    
-![](Readme_images/enviroment.png)
+![](readme_images/enviroment.png)
 
 
 
