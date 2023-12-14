@@ -38,13 +38,19 @@ and vice versa - simple and uniform form on the other hand.
 
 ![](readme_images/Class_numbers.png)
 
-## Evaluation Metrics
-For training, validation and testing, the dataset was divided in a stratified way (70/15/15): [Training_model/split_dfs]()
-* pre-trained weights: [Training_model/trained_models_tf/](Training_model/trained_models_tf/best_weights.hdf5);
-* chart metrics: [Training_model/res_metrics/]()
+## Model and evaluation metrics
+For training, validation and testing, the dataset was divided in a stratified way (70/15/15): ["Training_model/split_dfs"](Training_model/split_dfs)
 
-![](readme_images/metrics_36M_64x64_80ep_log.png)
+Testing on 17497 images: 
+* Accuracy: 99.66%
+* Macro-average: Precision=0.9973, Recall=0.9967, F1-Score=0.9970
+* Weighted-average: Precision=0.9966, Recall=0.9966, F1-Score=0.9966
+* Confusion matrix (.png): in folder ["Testing_model"](Testing_model/model_43M_32x32_9966)
+* Training history (.png): in folder ["Training_model/res_metrics"](Training_model/res_metrics)
+* Pre-trained weights: [Training_model/trained_models_tf](Training_model/trained_models_tf/model_43M_32x32_9966.hdf5);
+* Load model architecture: [Training_model/mymodel.py (import MyModel_32)](Training_model/mymodel.py)
 
+![](readme_images/model_43M_64x64_9984.png)
 
 ## Segmentation
 The [Detectron2]((https://github.com/facebookresearch/detectron2/blob/main/MODEL_ZOO.md)) 
@@ -53,7 +59,6 @@ The [Detectron2]((https://github.com/facebookresearch/detectron2/blob/main/MODEL
 * pip install "git+https://github.com/facebookresearch/detectron2.git"
 * The pre-trained weights: [detectron2/LVISv0.5-InstanceSegmentation/mask_rcnn_X_101_32x8d_FPN_1x/](https://dl.fbaipublicfiles.com/detectron2/LVISv0.5-InstanceSegmentation/mask_rcnn_X_101_32x8d_FPN_1x/144219108/model_final_5e3439.pkl)
 ![](readme_images/Segmented_Image.png)
-
 
 ## Environment
 For training on a video card, I used [tensorflow-gpu==2.10.0](https://www.tensorflow.org/install/source_windows). To install this library, you must use the following auxiliary tools:

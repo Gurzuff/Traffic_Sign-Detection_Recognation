@@ -56,7 +56,7 @@ def final_image(img_segmented, name_img, y_pred, y_prob):
 
 
 # Custom parameters
-name_weight = 'model_43M_32x32_9966'   # 'model_43M_64x64_9984'
+name_weight = 'model_43M_32x32_9966_'   # 'model_43M_64x64_9984'
 PATH_root = 'E:\DataSets\Traffic Sign - Detection&Recognation\Traffic_Sign - 200 classes'
 PATH_meta = os.path.join(PATH_root, 'Meta')
 # Paths to the folders with segmented test images and road signs
