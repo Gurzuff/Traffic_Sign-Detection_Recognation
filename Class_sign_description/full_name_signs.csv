@@ -1,0 +1,201 @@
+sign_group_priority,sign_group_name,sign_class,sign_name
+1 Priority,Priority signs,12,Priority road
+1 Priority,Priority signs,13,Give way
+1 Priority,Priority signs,14,Stop
+1 Priority,Priority signs,197,Priority road
+1 Priority,Priority signs,43,End of the priority road
+1 Priority,Priority signs,44,Minor road three-way intersection (right)
+1 Priority,Priority signs,45,Minor road three-way intersection (left)
+1 Priority,Priority signs,46,Priority of oncoming traffic
+1 Priority,Priority signs,47,Priority over oncoming traffic
+2 Warning,Warning signs,11,Crossroads (with a minor road)
+2 Warning,Warning signs,18,Other danger
+2 Warning,Warning signs,19,Curve left
+2 Warning,Warning signs,20,Curve right
+2 Warning,Warning signs,21,Series of curves
+2 Warning,Warning signs,22,Uneven surface
+2 Warning,Warning signs,23,Slippery road
+2 Warning,Warning signs,24,Road narrowing
+2 Warning,Warning signs,25,Roadworks
+2 Warning,Warning signs,26,Traffic signals
+2 Warning,Warning signs,27,Pedestrian crossing
+2 Warning,Warning signs,28,Children
+2 Warning,Warning signs,29,Bicycle path intersection
+2 Warning,Warning signs,30,Ice
+2 Warning,Warning signs,31,Wild animals
+2 Warning,Warning signs,48,Railway crossing with a barrier
+2 Warning,Warning signs,49,Railway crossing without a barrier
+2 Warning,Warning signs,50,Single-track railway
+2 Warning,Warning signs,51,Multi-track railway
+2 Warning,Warning signs,52,Approaching a railway crossing
+2 Warning,Warning signs,53,Tramway crossing
+2 Warning,Warning signs,54,Intersection of equivalent roads
+2 Warning,Warning signs,55,Roundabout
+2 Warning,Warning signs,56,Drawbridge
+2 Warning,Warning signs,57,Exit to an embankment
+2 Warning,Warning signs,58,Steep descent
+2 Warning,Warning signs,59,Steep ascent
+2 Warning,Warning signs,60,Speed bump
+2 Warning,Warning signs,61,Gravel surface
+2 Warning,Warning signs,62,Dangerous roadside
+2 Warning,Warning signs,63,Two-way traffic
+2 Warning,Warning signs,64,Domesticated animals
+2 Warning,Warning signs,65,Rockfall
+2 Warning,Warning signs,66,Crosswind
+2 Warning,Warning signs,67,Low-flying aircraft
+2 Warning,Warning signs,68,Tunnel
+2 Warning,Warning signs,69,Congestion
+2 Warning,Warning signs,70,Hazard chevron (left)
+2 Warning,Warning signs,71,Hazard chevron (right)
+3 Prohibitory,Prohibitory signs,0,Maximum speed limit
+3 Prohibitory,Prohibitory signs,10,No overtaking by lorries
+3 Prohibitory,Prohibitory signs,15,Traffic prohibited
+3 Prohibitory,Prohibitory signs,16,No lorries
+3 Prohibitory,Prohibitory signs,17,Entry prohibited
+3 Prohibitory,Prohibitory signs,32,End of all restrictions
+3 Prohibitory,Prohibitory signs,42,End of overtaking restriction
+3 Prohibitory,Prohibitory signs,6,End of maximum speed limit
+3 Prohibitory,Prohibitory signs,72,No motor vehicles
+3 Prohibitory,Prohibitory signs,73,No motorcycles
+3 Prohibitory,Prohibitory signs,74,No tractors
+3 Prohibitory,Prohibitory signs,75,No vehicles with trailer
+3 Prohibitory,Prohibitory signs,76,No horse-drawn carts
+3 Prohibitory,Prohibitory signs,77,No cycling
+3 Prohibitory,Prohibitory signs,78,No pedestrians
+3 Prohibitory,Prohibitory signs,79,Vehicle weight limit
+3 Prohibitory,Prohibitory signs,80,Weight per axle limit
+3 Prohibitory,Prohibitory signs,81,Height limit
+3 Prohibitory,Prohibitory signs,82,Width limit
+3 Prohibitory,Prohibitory signs,83,Length limit
+3 Prohibitory,Prohibitory signs,84,Minimum distance limit
+3 Prohibitory,Prohibitory signs,85,Customs
+3 Prohibitory,Prohibitory signs,86,Danger
+3 Prohibitory,Prohibitory signs,87,Control
+3 Prohibitory,Prohibitory signs,88,No right turn
+3 Prohibitory,Prohibitory signs,89,No left turn
+3 Prohibitory,Prohibitory signs,9,No overtaking
+3 Prohibitory,Prohibitory signs,90,No U-turn
+3 Prohibitory,Prohibitory signs,91,No beeping
+3 Prohibitory,Prohibitory signs,92,No stopping
+3 Prohibitory,Prohibitory signs,93,No parking
+3 Prohibitory,Prohibitory signs,94,No parking on odd days of the month
+3 Prohibitory,Prohibitory signs,95,No parking on even days of the month
+3 Prohibitory,Prohibitory signs,96,No vehicles with dangerous goods
+3 Prohibitory,Prohibitory signs,97,No vehicles with explosive and flammable loads
+4 Mandatory,Mandatory signs,100,Cycle path
+4 Mandatory,Mandatory signs,101,End of a cycle path
+4 Mandatory,Mandatory signs,102,Footpath
+4 Mandatory,Mandatory signs,103,Shared-use path
+4 Mandatory,Mandatory signs,104,End of shared-use path
+4 Mandatory,Mandatory signs,105,Segregated pedestrian and cycle path
+4 Mandatory,Mandatory signs,106,End of segregated pedestrian and cycle path
+4 Mandatory,Mandatory signs,107,Minimum speed limit
+4 Mandatory,Mandatory signs,108,End of minimum speed limit
+4 Mandatory,Mandatory signs,109,Direction of movement of vehicles with dangerous goods
+4 Mandatory,Mandatory signs,33,Go right
+4 Mandatory,Mandatory signs,34,Go left
+4 Mandatory,Mandatory signs,35,Go straight
+4 Mandatory,Mandatory signs,36,Go straight or right
+4 Mandatory,Mandatory signs,37,Go straight or left
+4 Mandatory,Mandatory signs,38,Detour on the right
+4 Mandatory,Mandatory signs,39,Detour on the left
+4 Mandatory,Mandatory signs,40,Direction of roundabout traffic
+4 Mandatory,Mandatory signs,98,Go right or left
+4 Mandatory,Mandatory signs,99,Detour on the right or left
+5 Special regulations,Special regulations signs,1,Exit to a one-way road (left)
+5 Special regulations,Special regulations signs,110,Motorway
+5 Special regulations,Special regulations signs,111,End of motorway
+5 Special regulations,Special regulations signs,112,Road for cars
+5 Special regulations,Special regulations signs,113,End of road for cars
+5 Special regulations,Special regulations signs,114,One-way road
+5 Special regulations,Special regulations signs,115,End of one-way road
+5 Special regulations,Special regulations signs,116,Exit to a one-way road (right)
+5 Special regulations,Special regulations signs,117,Reversible lane
+5 Special regulations,Special regulations signs,118,End of reversible lane
+5 Special regulations,Special regulations signs,119,Reversible lane
+5 Special regulations,Special regulations signs,120,Road with a contraflow bus lane
+5 Special regulations,Special regulations signs,121,Road with a contraflow cycle lane
+5 Special regulations,Special regulations signs,122,End of road with a contraflow bus lane
+5 Special regulations,Special regulations signs,123,End of road with a contraflow cycle lane
+5 Special regulations,Special regulations signs,124,Exit to road with a contraflow bus lane
+5 Special regulations,Special regulations signs,125,Exit to road with a contraflow cycle lane
+5 Special regulations,Special regulations signs,126,Bus lane
+5 Special regulations,Special regulations signs,127,End of bus lane
+5 Special regulations,Special regulations signs,128,Cycle lane
+5 Special regulations,Special regulations signs,129,End of cycle lane
+5 Special regulations,Special regulations signs,130,Lane directions
+5 Special regulations,Special regulations signs,131,End of the lane
+5 Special regulations,Special regulations signs,132,Number of lanes
+5 Special regulations,Special regulations signs,133,Bus andor trolleybus stop location
+5 Special regulations,Special regulations signs,134,Tram stop location
+5 Special regulations,Special regulations signs,135,Parking place for passenger taxis
+5 Special regulations,Special regulations signs,136,Residential area
+5 Special regulations,Special regulations signs,137,End of residential area
+5 Special regulations,Special regulations signs,138,Built-up area begins
+5 Special regulations,Special regulations signs,139,End of built-up area
+5 Special regulations,Special regulations signs,140,No parking zone
+5 Special regulations,Special regulations signs,141,End of no parking zone
+5 Special regulations,Special regulations signs,142,Regulated parking zone
+5 Special regulations,Special regulations signs,143,End of the regulated parking zone
+5 Special regulations,Special regulations signs,144,Maximum speed limit zone
+5 Special regulations,Special regulations signs,145,End of maximum speed limit zone
+5 Special regulations,Special regulations signs,146,Pedestrian zone
+5 Special regulations,Special regulations signs,147,End of pedestrian zone
+5 Special regulations,Special regulations signs,2,Speed bump
+5 Special regulations,Special regulations signs,41,Pedestrian crossing
+6 Information,Information signs,148,General maximum speed limits
+6 Information,Information signs,149,Recommended speed
+6 Information,Information signs,150,Place for a U-turn
+6 Information,Information signs,151,The area for a U-turn
+6 Information,Information signs,152,Parking (parking space)
+6 Information,Information signs,153,Emergency stop lane
+6 Information,Information signs,154,Underground pedestrian crossing
+6 Information,Information signs,155,Above ground pedestrian crossing
+6 Information,Information signs,156,Deadlock
+6 Information,Information signs,157,Preliminary direction indicator
+6 Information,Information signs,158,Traffic scheme
+6 Information,Information signs,159,Direction indicator
+6 Information,Information signs,160,Distance indicator
+6 Information,Information signs,161,Kilometre marker
+6 Information,Information signs,162,Route number
+6 Information,Information signs,163,Truck route
+6 Information,Information signs,164,Stop line
+7 Service,Service signs,165,Point of medical care
+7 Service,Service signs,166,Hospital
+7 Service,Service signs,167,Gas station
+7 Service,Service signs,168,Vehicle maintenance
+7 Service,Service signs,169,Car washing
+7 Service,Service signs,170,Phone
+7 Service,Service signs,171,Food point
+7 Service,Service signs,172,Drinking water
+7 Service,Service signs,173,Hotel or motel
+7 Service,Service signs,174,Camping
+7 Service,Service signs,175,Place of rest
+7 Service,Service signs,176,Traffic police post
+7 Service,Service signs,177,Police
+7 Service,Service signs,178,Transport control point
+7 Service,Service signs,179,Pool or beach
+7 Service,Service signs,180,Toilet
+7 Service,Service signs,181,Emergency telephone number
+7 Service,Service signs,182,Fire extinguisher
+8 Additional,Additional signs,183,Distance to the object
+8 Additional,Additional signs,184,Coverage area
+8 Additional,Additional signs,185,Type of vehicle
+8 Additional,Additional signs,186,Except for the type of vehicle
+8 Additional,Additional signs,187,"Saturdays, Sundays and holidays"
+8 Additional,Additional signs,188,Working days
+8 Additional,Additional signs,189,Validity period
+8 Additional,Additional signs,190,Method of parking the vehicle
+8 Additional,Additional signs,191,Parking with an idle engine
+8 Additional,Additional signs,192,Paid services
+8 Additional,Additional signs,193,Limitation of parking duration
+8 Additional,Additional signs,194,Place for car inspection
+8 Additional,Additional signs,195,Limitation of the permitted maximum mass
+8 Additional,Additional signs,196,Dangerous roadside
+8 Additional,Additional signs,198,Traffic lane
+8 Additional,Additional signs,199,Blind pedestrians
+8 Additional,Additional signs,3,The tow truck is working
+8 Additional,Additional signs,4,Photovideofixation
+8 Additional,Additional signs,5,Except for the disabled
+8 Additional,Additional signs,7,Disabled people
+8 Additional,Additional signs,8,Wet coating

@@ -1,37 +1,99 @@
-# models/mymodel.py
-
 import tensorflow as tf
 from keras.callbacks import Callback
 from keras.layers import Conv2D, BatchNormalization, MaxPooling2D, Dropout, Flatten, Dense
 
-class MyCallback(Callback):
-    def on_epoch_end(self, epoch, logs={}):
-        if (logs.get('val_accuracy') >= 0.9995):
-            print('\nReached 99.95% accuracy!')
-            self.model.stop_training = True
-
-class MyModel(tf.keras.Model):
+#  2Conv_2MaxPool: 32 -> 16 -> 8; 2xDense(512, 512) - 43M
+class MyModel_32(tf.keras.Model):
     def __init__(self, classes, input_shape):
-        super(MyModel, self).__init__()
-
+        super(MyModel_32, self).__init__()
         # first block-layers
-        self.conv1 = Conv2D(64, 3, 1, activation='relu', padding='same', input_shape=input_shape)
+        self.conv1 = Conv2D(128, 3, 1, activation='relu', padding='same', input_shape=input_shape)
         self.bn1 = BatchNormalization()
-        self.conv2 = Conv2D(128, 3, 1, activation='relu', padding='same')
+        self.conv2 = Conv2D(256, 3, 1, activation='relu', padding='same')
         self.bn2 = BatchNormalization()
         self.maxpool1 = MaxPooling2D()
         self.dropout1 = Dropout(0.25)
         # second block-layers
-        self.conv3 = Conv2D(128, 3, 1, activation='relu', padding='same')
+        self.conv3 = Conv2D(256, 3, 1, activation='relu', padding='same')
         self.bn3 = BatchNormalization()
-        self.conv4 = Conv2D(256, 3, 1, activation='relu', padding='same')
+        self.conv4 = Conv2D(512, 3, 1, activation='relu', padding='same')
         self.bn4 = BatchNormalization()
         self.maxpool2 = MaxPooling2D()
         self.dropout2 = Dropout(0.25)
         # third block-layers
-        self.conv5 = Conv2D(256, 3, 1, activation='relu', padding='same')
+        self.conv5 = Conv2D(512, 3, 1, activation='relu', padding='same')
         self.bn5 = BatchNormalization()
-        self.conv6 = Conv2D(512, 3, 1, activation='relu', padding='same')
+        self.conv6 = Conv2D(1024, 3, 1, activation='relu', padding='same')
+        self.bn6 = BatchNormalization()
+        # self.maxpool3 = MaxPooling2D()
+        self.dropout3 = Dropout(0.25)
+        # head layers
+        self.flatten = Flatten()
+        self.dense1 = Dense(512, activation='relu')
+        self.bn7 = BatchNormalization()
+        self.dropout4 = Dropout(0.25)
+        self.dense2 = Dense(512, activation='relu')
+        self.bn8 = BatchNormalization()
+        self.dropout5 = Dropout(0.35)
+        self.dense3 = Dense(classes, activation='softmax')
+
+    def call(self, inputs, training=None, mask=None):
+        x = inputs
+        # first block-layers
+        x = self.conv1(x)
+        x = self.bn1(x)
+        x = self.conv2(x)
+        x = self.bn2(x)
+        x = self.maxpool1(x)
+        x = self.dropout1(x)
+        # second block-layers
+        x = self.conv3(x)
+        x = self.bn3(x)
+        x = self.conv4(x)
+        x = self.bn4(x)
+        x = self.maxpool2(x)
+        x = self.dropout2(x)
+        # third block-layers
+        x = self.conv5(x)
+        x = self.bn5(x)
+        x = self.conv6(x)
+        x = self.bn6(x)
+        # x = self.maxpool3(x)
+        x = self.dropout3(x)
+        # head layers
+        x = self.flatten(x)
+        x = self.dense1(x)
+        x = self.bn7(x)
+        x = self.dropout4(x)
+        x = self.dense2(x)
+        x = self.bn8(x)
+        x = self.dropout5(x)
+        x = self.dense3(x)
+        return x
+
+
+#  48 -> 24 -> 12 -> 6: 2xDense(1024, 1024) - 48M
+class MyModel_48(tf.keras.Model):
+    def __init__(self, classes, input_shape):
+        super(MyModel_48, self).__init__()
+        # first block-layers
+        self.conv1 = Conv2D(128, 3, 1, activation='relu', padding='same', input_shape=input_shape)
+        self.bn1 = BatchNormalization()
+        self.conv2 = Conv2D(256, 3, 1, activation='relu', padding='same')
+        self.bn2 = BatchNormalization()
+        self.maxpool1 = MaxPooling2D()
+        self.dropout1 = Dropout(0.25)
+        # second block-layers
+        self.conv3 = Conv2D(256, 3, 1, activation='relu', padding='same')
+        self.bn3 = BatchNormalization()
+        self.conv4 = Conv2D(512, 3, 1, activation='relu', padding='same')
+        self.bn4 = BatchNormalization()
+        self.maxpool2 = MaxPooling2D()
+        self.dropout2 = Dropout(0.25)
+        # third block-layers
+        self.conv5 = Conv2D(512, 3, 1, activation='relu', padding='same')
+        self.bn5 = BatchNormalization()
+        self.conv6 = Conv2D(1024, 3, 1, activation='relu', padding='same')
         self.bn6 = BatchNormalization()
         self.maxpool3 = MaxPooling2D()
         self.dropout3 = Dropout(0.25)
@@ -39,8 +101,11 @@ class MyModel(tf.keras.Model):
         self.flatten = Flatten()
         self.dense1 = Dense(1024, activation='relu')
         self.bn7 = BatchNormalization()
-        self.dropout4 = Dropout(0.4)
-        self.dense2 = Dense(classes, activation='softmax')
+        self.dropout4 = Dropout(0.35)
+        self.dense2 = Dense(1024, activation='relu')
+        self.bn8 = BatchNormalization()
+        self.dropout5 = Dropout(0.5)
+        self.dense3 = Dense(classes, activation='softmax')
 
     def call(self, inputs, training=None, mask=None):
         x = inputs
@@ -71,4 +136,78 @@ class MyModel(tf.keras.Model):
         x = self.bn7(x)
         x = self.dropout4(x)
         x = self.dense2(x)
+        x = self.bn8(x)
+        x = self.dropout5(x)
+        x = self.dense3(x)
         return x
+
+
+#  64 -> 32 -> 16 -> 8: 2xDense(1024, 1024) - 43M
+class MyModel_64(tf.keras.Model):
+    def __init__(self, classes, input_shape):
+        super(MyModel_64, self).__init__()
+        # first block-layers
+        self.conv1 = Conv2D(128, 3, 1, activation='relu', padding='same', input_shape=input_shape)
+        self.bn1 = BatchNormalization()
+        self.conv2 = Conv2D(256, 3, 1, activation='relu', padding='same')
+        self.bn2 = BatchNormalization()
+        self.maxpool1 = MaxPooling2D()
+        self.dropout1 = Dropout(0.25)
+        # second block-layers
+        self.conv3 = Conv2D(256, 3, 1, activation='relu', padding='same')
+        self.bn3 = BatchNormalization()
+        self.conv4 = Conv2D(512, 3, 1, activation='relu', padding='same')
+        self.bn4 = BatchNormalization()
+        self.maxpool2 = MaxPooling2D()
+        self.dropout2 = Dropout(0.25)
+        # third block-layers
+        self.conv5 = Conv2D(512, 3, 1, activation='relu', padding='same')
+        self.bn5 = BatchNormalization()
+        self.conv6 = Conv2D(1024, 3, 1, activation='relu', padding='same')
+        self.bn6 = BatchNormalization()
+        self.maxpool3 = MaxPooling2D()
+        self.dropout3 = Dropout(0.25)
+        # head layers
+        self.flatten = Flatten()
+        self.dense1 = Dense(512, activation='relu')
+        self.bn7 = BatchNormalization()
+        self.dropout4 = Dropout(0.3)
+        self.dense2 = Dense(1024, activation='relu')
+        self.bn8 = BatchNormalization()
+        self.dropout5 = Dropout(0.35)
+        self.dense3 = Dense(classes, activation='softmax')
+
+    def call(self, inputs, training=None, mask=None):
+        x = inputs
+        # first block-layers
+        x = self.conv1(x)
+        x = self.bn1(x)
+        x = self.conv2(x)
+        x = self.bn2(x)
+        x = self.maxpool1(x)
+        x = self.dropout1(x)
+        # second block-layers
+        x = self.conv3(x)
+        x = self.bn3(x)
+        x = self.conv4(x)
+        x = self.bn4(x)
+        x = self.maxpool2(x)
+        x = self.dropout2(x)
+        # third block-layers
+        x = self.conv5(x)
+        x = self.bn5(x)
+        x = self.conv6(x)
+        x = self.bn6(x)
+        x = self.maxpool3(x)
+        x = self.dropout3(x)
+        # head layers
+        x = self.flatten(x)
+        x = self.dense1(x)
+        x = self.bn7(x)
+        x = self.dropout4(x)
+        x = self.dense2(x)
+        x = self.bn8(x)
+        x = self.dropout5(x)
+        x = self.dense3(x)
+        return x
+

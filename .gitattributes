@@ -1,2 +1,2 @@
-Training_model/trained_models_tf/best_weights.hdf5 filter=lfs diff=lfs merge=lfs -text
-Training_model/trained_models_tf/model_36M_64x64_9985.hdf5 filter=lfs diff=lfs merge=lfs -text
+Training_model/trained_models_tf/model_43M_32x32_9966.hdf5 filter=lfs diff=lfs merge=lfs -text
+Training_model/trained_models_tf/model_43M_64x64_9984.hdf5 filter=lfs diff=lfs merge=lfs -text

@@ -4,3 +4,4 @@
 .idea/
 venv_tf_gpu/
 temp/
+.ipynb_checkpoints/
