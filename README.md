@@ -11,7 +11,7 @@ More than 95% of road signs in post-Soviet countries are identical, so you can u
 **More details in [Wikipedia](https://en.wikipedia.org/wiki/Traffic_signs_in_post-Soviet_states)**
 ![](readme_images/Traffic_signs_in_post_Soviet_states.png)
 
-## Project Structure
+## Project Structure (... in progress ...)
 - **EDA.ipynb**: Exploratory Data Analysis
 - **segmentation.py**: Uses [Detectron2](https://github.com/facebookresearch/detectron2/blob/main/MODEL_ZOO.md) for segmentation road signs in general images:
   - [Segmentation_image/segmented_images/]() - a folder with segmented road signs on general image (jpg-files);
