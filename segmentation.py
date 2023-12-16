@@ -8,8 +8,14 @@ from detectron2.utils.visualizer import Visualizer
 
 def sign_segmentation(instances, metadata, im, prob_threshold=0.5, segm_size=64):
     '''
-    1) checks for the presence of "street_sign" classes according to a given probability threshold;
-    2) performs resize according to the given size: 256*256.
+    Segments signs on the image.
+    Parameters:
+    - instances: Object detection model results as instances.
+    - metadata: Metadata containing information about object classes and additional details.
+    - im: Input image for segmentation.
+    - prob_threshold: Probability threshold for "street_sign" class detection.
+    - segm_size: Size to which the sign segments are resized (default is 64x64).
+    Returns a list of segmented sign images.
     '''
     # Get indexes of segments corresponding to the "human" class and exceeding the probability threshold
     sign_mask = (instances.pred_classes == metadata.thing_classes.index('street_sign'))   # 'stop_sign'
@@ -31,42 +37,51 @@ def sign_segmentation(instances, metadata, im, prob_threshold=0.5, segm_size=64)
 
     return segmented_signs
 
+# CUSTOM PARAMETERS
+# shape of segmented signs
+sign_size = 32      # [32, 48, 64]
+# threshold of probability for segmentation traffic signs
+segment_threshold = 0.45
+# path test images folder
+PATH_test_imgs = 'Test_images'
+# weights for detectron2 model
+detectron2_config_file = "LVISv0.5-InstanceSegmentation/mask_rcnn_X_101_32x8d_FPN_1x.yaml"
+DEVICE = "cpu"
+
 def main():
-    # Create config
+    # Create config (for detectron2)
     cfg = get_cfg()
     # Pre-trained model that can detect road signs
-    # https://dl.fbaipublicfiles.com/detectron2/LVISv0.5-InstanceSegmentation/mask_rcnn_X_101_32x8d_FPN_1x/144219108/model_final_5e3439.pkl
-    cfg.merge_from_file(model_zoo.get_config_file("LVISv0.5-InstanceSegmentation/mask_rcnn_X_101_32x8d_FPN_1x.yaml"))
-    cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url("LVISv0.5-InstanceSegmentation/mask_rcnn_X_101_32x8d_FPN_1x.yaml")
+    cfg.merge_from_file(model_zoo.get_config_file(detectron2_config_file))
+    cfg.MODEL.WEIGHTS = model_zoo.get_checkpoint_url(detectron2_config_file)
 
     # Probability threshold for the sought classes
-    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = 0.45
+    cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = segment_threshold
 
     # Information about object classes and their labels
     metadata = MetadataCatalog.get(cfg.DATASETS.TRAIN[0])
 
     # Create predictor
-    cfg.MODEL.DEVICE = "cpu"
+    cfg.MODEL.DEVICE = DEVICE
     predictor = DefaultPredictor(cfg)
 
-    test_images = os.listdir('Inference_model/test_images')
+    test_images = os.listdir(PATH_test_imgs)
     for file in test_images:
         # Load image
-        image_url = os.path.join('Inference_model/test_images/', file)
+        image_url = os.path.join(PATH_test_imgs, file)
         image = cv2.imread(image_url)
 
         # Get prediction
         outputs = predictor(image)
 
-        v = Visualizer(image, metadata, scale=1.2)
-        # out = v.draw_instance_predictions(outputs["instances"].to("cpu"))
-
         # Filter the drawn instances to include only 'street_sign'
-        instances_filtered = outputs["instances"].to("cpu")
+        instances_filtered = outputs["instances"].to(DEVICE)
         instances_filtered = instances_filtered[
             instances_filtered.pred_classes == metadata.thing_classes.index('street_sign')
         ]
 
+        # Get image with segmented signs
+        v = Visualizer(image, metadata, scale=1.2)
         out = v.draw_instance_predictions(instances_filtered)
         out_image = out.get_image()
 
@@ -74,18 +89,17 @@ def main():
         cv2.imwrite(f"Segmentation_image/segmented_images/{file}", out_image)
 
         # Extract the predicted instances (shards) from outputs:
-        instances = outputs["instances"].to("cpu")
+        instances = outputs["instances"].to(DEVICE)
 
         # Get segmented signs
-        score_threshold = 0.45
-        segmented_signs = sign_segmentation(instances, metadata, image, prob_threshold=score_threshold)
+        segmented_signs = sign_segmentation(instances, metadata, image, prob_threshold=segment_threshold, segm_size=sign_size)
 
         # Save segmented signs
-        for i, sign_segment in enumerate(segmented_signs):
-            os.makedirs(f'Segmentation_image/segmented_sign/{file}', exist_ok=True)
-            cv2.imwrite(f"Segmentation_image/segmented_sign/{file}/sign_{i}.png", sign_segment)
+        for i, segmented_sign in enumerate(segmented_signs):
+            os.makedirs(f'Segmentation_image/segmented_sign_{sign_size}/{file}', exist_ok=True)
+            cv2.imwrite(f"Segmentation_image/segmented_sign_{sign_size}/{file}/sign_{i}.png", segmented_sign)
 
-        print(f'{len(segmented_signs)} traffic signs detected in {file}')
+        print(f'{len(segmented_signs)} traffic signs segmented from {file}')
 
 if __name__ == '__main__':
     main()

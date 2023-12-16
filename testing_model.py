@@ -9,42 +9,52 @@ from keras.preprocessing.image import ImageDataGenerator
 from sklearn.metrics import confusion_matrix, classification_report
 from sklearn.metrics import accuracy_score, f1_score
 
-from Training_model.mymodel import MyModel_32, MyModel_64
+from Training_model.mymodel import MyModel_32, MyModel_48, MyModel_64
 
 def save_conf_matrix(y_true, y_pred, name_weight):
-    # Create folder for save confusion matrix
-    if os.path.exists(f'Testing_model/{name_weight}'):
-        pass
-    else:
-        os.makedirs(f'Testing_model/{name_weight}')
+    '''
+    Generates and saves confusion matrices for the classification results.
+    Parameters:
+    - y_true: True class labels.
+    - y_pred: Predicted class labels.
+    - name_weight: Name identifier for the model.
+    Saves four smaller confusion matrices for a more detailed analysis.
+    '''
+    # Create folder to save confusion matrix
+    os.makedirs(f'Testing_model/{name_weight}', exist_ok=True)
 
     # Confusion matrix
     c_m = confusion_matrix(y_true, y_pred)
-    class_totals = np.sum(c_m, axis=1)                # Total number of objects in each class
-    matrix_percent = (c_m.T / class_totals).T * 100   # Converting Matrix to percentage
+    # Total number of objects in each class
+    class_totals = np.sum(c_m, axis=1)
+    # Converting matrix to percentage
+    matrix_percent = (c_m.T / class_totals).T * 100
 
-    # Build and save several smaller confusion matrix
-    cm_size = 50        # confusion matrix on 'cm_size' classes
+    # Build and save 4 smaller confusion matrix (50 classes)
+    c_m_size = 50
     unique_labels = np.unique(y_true)
     for i in range(4):
         plt.figure(figsize=(18, 10))
-        c_m_small = matrix_percent[cm_size*i:cm_size*(i+1), cm_size*i:cm_size*(i+1)]
-        mask = c_m_small == 0.0    # mask for zero values
+        # smaller confusion matrix (50 classes)
+        c_m_small = matrix_percent[c_m_size*i:c_m_size*(i+1), c_m_size*i:c_m_size*(i+1)]
+        # mask for zero values
+        mask = c_m_small == 0.0
         sns.heatmap(c_m_small, annot=True, cbar=False, mask=mask,
                     annot_kws={'size': 7}, fmt='.0f',
                     cmap='summer_r',
-                    xticklabels=unique_labels[cm_size * i:cm_size * (i + 1)],
-                    yticklabels=unique_labels[cm_size * i:cm_size * (i + 1)]
+                    xticklabels=unique_labels[c_m_size * i:c_m_size * (i + 1)],
+                    yticklabels=unique_labels[c_m_size * i:c_m_size * (i + 1)]
                     )
         plt.xlabel('Predicted')
         plt.ylabel('True')
         plt.title(f'Confusion Matrix part_{i+1}')
         plt.savefig(f'Testing_model/{name_weight}/Confusion Matrix part_{i+1}')
-        i += cm_size
+        i += c_m_size
 
-# CUSTOM parameters
-# Set parameters for model shape
-KERNEL = 32
+# CUSTOM PARAMETERS
+# Choose the weight of pre-trained models ('Training_model\models_weights')
+name_weight = 'model_43M_64x64_9984'
+KERNEL = int(name_weight[10:12])
 input_shape = (None, KERNEL, KERNEL, 3)
 
 # Dataset of images
@@ -53,20 +63,19 @@ PATH_train = os.path.join(PATH_root, 'Train')
 # Number of road sign classes
 CLASSES = len(os.listdir(PATH_train))
 
-# Load the model and pre-trained weights
-model = MyModel_32(CLASSES, input_shape)
+# Choose the model (MyModel_32, MyModel_48, MyModel_64) and load pre-trained weights
+model = MyModel_64(CLASSES, input_shape)
 model.build(input_shape)
-name_weight = 'model_43M_32x32_9966'
-model.load_weights(f'Training_model/trained_models_tf/{name_weight}.hdf5')
+model.load_weights(f'Training_model/models_weights/{name_weight}.hdf5')
+
+# Load test dataframe
+test_data = pd.read_csv('Training_model/split_dfs/df_test.csv')
+
+# Load test generator parameters
+with open(f'Testing_model/test_generator_params/test_generator_{KERNEL}.pkl', 'rb') as file:
+    test_generator_params = pickle.load(file)
 
 def main():
-    # Load test dataframe
-    test_data = pd.read_csv('Training_model\split_dfs\df_test.csv')
-
-    # Load test generator parameters
-    with open(r'Training_model\test_generator_params.pkl', 'rb') as file:
-        test_generator_params = pickle.load(file)
-
     # Create test generator
     test_datagen = ImageDataGenerator(rescale=1./255)
     test_generator = test_datagen.flow_from_dataframe(**test_generator_params)
