@@ -1,0 +1,38 @@
+3.1.svg|Entry prohibited
+3.2.svg|Traffic prohibited
+3.3.svg|No motor vehicles
+3.4.svg|No lorries
+3.5.svg|No motorcycles
+3.6.svg|No tractors
+3.7.svg|No vehicles with trailer
+3.8.svg|No horse-drawn carts
+3.9.svg|No cycling
+3.10.svg|No pedestrians
+3.11.svg|Vehicle weight limit
+3.12.svg|Weight per axle limit
+3.13.svg|Height limit
+3.14.svg|Width limit
+3.15.svg|Length limit
+3.16.svg|Minimum distance limit
+3.17.1.svg|Customs
+3.17.2.svg|Danger
+3.17.3.svg|Control
+3.18.1.svg|No right turn
+3.18.2.svg|No left turn
+3.19.svg|No U-turn
+3.20.svg|No overtaking
+3.21.svg|End of overtaking restriction
+3.22.svg|No overtaking by lorries
+3.23.svg|End of overtaking by lorries restriction
+3.24-50.svg|Maximum speed limit
+3.25-50.svg|End of maximum speed limit
+3.26.svg|No beeping
+3.27.svg|No stopping
+3.28.svg|No parking
+3.29.svg|No parking on odd days of the month
+3.30.svg|No parking on even days of the month
+3.31.svg|End of all restrictions
+3.32.svg|No vehicles with dangerous goods
+3.33.svg|No vehicles with explosive and flammable loads
+3.34.svg|No buses
+3.35.svg|No personal mobility devices

@@ -1,0 +1,13 @@
+2.1.svg|Priority road
+2.2.svg|End of the priority road
+2.3.1.svg|Minor road four-way intersection
+2.3.2.svg|Minor road three-way intersection
+2.3.3.svg|Minor road three-way intersection
+2.3.4.svg|Minor road three-way intersection
+2.3.5.svg|Minor road three-way intersection
+2.3.6.svg|Minor road three-way intersection
+2.3.7.svg|Minor road three-way intersection
+2.4.svg|Give way
+2.5.svg|Stop
+2.6.svg|Priority of oncoming traffic
+2.7.svg|Priority over oncoming traffic

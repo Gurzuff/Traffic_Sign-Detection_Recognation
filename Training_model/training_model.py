@@ -5,11 +5,11 @@ import matplotlib.pyplot as plt
 
 import tensorflow as tf
 from keras.preprocessing.image import ImageDataGenerator
-from keras.optimizers import Adam, RMSprop
+from keras.optimizers import RMSprop
 from keras.callbacks import Callback, EarlyStopping, ModelCheckpoint, ReduceLROnPlateau
 from sklearn.model_selection import train_test_split
 
-from Training_model.mymodel import MyModel_32, MyModel_48, MyModel_64
+from classes.mymodel import MyModel_32, MyModel_48, MyModel_64
 
 def split_df(PATH_data, SEED):
     '''
@@ -38,15 +38,12 @@ def split_df(PATH_data, SEED):
                                              stratify=df_road_sign['class_id'])
     valid_data, test_data = train_test_split(temp_data, test_size=0.5, shuffle=True, random_state=SEED,
                                              stratify=temp_data['class_id'])
-    print(f'train_data={train_data.shape[0]} images, '
-          f'valid_data={valid_data.shape[0]} images, '
-          f'test_data={test_data.shape[0]} images')
 
     # Save DFs
-    train_data.to_csv('Training_model/split_dfs/df_train.csv', header=True, index=None)
-    valid_data.to_csv('Training_model/split_dfs/df_valid.csv', header=True, index=None)
-    test_data.to_csv('Training_model/split_dfs/df_test.csv', header=True, index=None)
-    df_road_sign.to_csv('Training_model/split_dfs/df_road_sign.csv', header=True, index=None)
+    train_data.to_csv('split_dfs/df_train.csv', header=True, index=None)
+    valid_data.to_csv('split_dfs/df_valid.csv', header=True, index=None)
+    test_data.to_csv('split_dfs/df_test.csv', header=True, index=None)
+    df_road_sign.to_csv('split_dfs/df_road_sign.csv', header=True, index=None)
 
     return train_data, valid_data, test_data
 
@@ -74,6 +71,7 @@ def data_generators(train_data, valid_data, test_data, PATH_train, BATCH, target
                                      brightness_range=[0.9, 1.1]
                                      )
     # Train generator
+    print('Train dataset:', end=' ')
     train_generator = aug_datagen.flow_from_dataframe(dataframe=train_data,
                                                       directory=PATH_train,
                                                       x_col='img_path',
@@ -85,6 +83,7 @@ def data_generators(train_data, valid_data, test_data, PATH_train, BATCH, target
                                                       seed=SEED
                                                       )
     # Validation generator
+    print('Valid dataset:', end=' ')
     valid_datagen = ImageDataGenerator(rescale=1. / 255)
     valid_generator = valid_datagen.flow_from_dataframe(dataframe=valid_data,
                                                         directory=PATH_train,
@@ -97,6 +96,7 @@ def data_generators(train_data, valid_data, test_data, PATH_train, BATCH, target
                                                         seed=SEED
                                                         )
     # Test generator
+    print('Test dataset:', end=' ')
     test_datagen = ImageDataGenerator(rescale=1. / 255)
     test_generator_params = {'dataframe': test_data,
                              'directory': PATH_train,
@@ -109,7 +109,7 @@ def data_generators(train_data, valid_data, test_data, PATH_train, BATCH, target
                              'seed': SEED}
     test_generator = test_datagen.flow_from_dataframe(**test_generator_params)
     # Save Test generator parameters
-    with open(f'Testing_model/test_generator_params/test_generator_{target_size[0]}.pkl', 'wb') as file:
+    with open(f'test_generator_params/test_generator_{target_size[0]}.pkl', 'wb') as file:
         pickle.dump(test_generator_params, file)
 
     return train_generator, valid_generator, test_generator
@@ -126,7 +126,7 @@ def metrics_chart(model, name_weight, test_generator, history, EPOCHS):
     Displays and saves plots for accuracy and loss metrics.
     '''
     # Evaluate the model on the test data
-    model.load_weights(f'Training_model/models_weights/{name_weight}.hdf5')
+    model.load_weights(f'models_weights/{name_weight}.hdf5')
     test_results = model.evaluate(test_generator)
     print('Model evaluate: [Loss, Accuracy] =', test_results)
 
@@ -164,7 +164,7 @@ def metrics_chart(model, name_weight, test_generator, history, EPOCHS):
 
     # Save the figure
     name_chart = name_weight[6:15]
-    plt.savefig(f'Training_model/res_metrics/metrics_{name_chart}_{EPOCHS}.png')
+    plt.savefig(f'evaluate_metrics/metrics_{name_chart}_{EPOCHS}.png')
     plt.show()
 
 class MyEarlyStop(Callback):
@@ -215,8 +215,9 @@ print("Num GPUs Available: ", len(tf.config.list_physical_devices('GPU')))
 
 # CUSTOM PARAMETERS
 SEED = 33
-EPOCHS = 99
-KERNEL = 64
+KERNEL = 64     # shape of input image: [32, 48, 64]
+EPOCHS = 99     # number epochs in training
+CLASSES = 200   # Number of road sign classes
 # Dict: {KERNEL: [BATCH, STEPS]}
 KERNEL_dict = {32: [256, 64], 48: [128, 128], 64: [64, 128]}
 BATCH = KERNEL_dict[KERNEL][0]
@@ -225,13 +226,9 @@ print(f'SHAPE: {KERNEL}x{KERNEL}, BATCH: {BATCH}, STEPS: {STEPS}')
 target_size = (KERNEL, KERNEL)
 input_shape = (None, KERNEL, KERNEL, 3)
 # Dataset of images
-PATH_root = 'E:\DataSets\Traffic Sign - Detection&Recognation\Traffic_Sign - 200 classes'
-PATH_train = os.path.join(PATH_root, 'Train')
-# Number of road sign classes
-CLASSES = len(os.listdir(PATH_train))
-print('Number classes:', CLASSES)
+PATH_data = 'E:\DataSets\Traffic_Sign - 200 classes\data'
 # Set model and main parameters
-model = MyModel_32(CLASSES, input_shape)
+model = MyModel_64(CLASSES, input_shape)
 model.build(input_shape)
 
 def main():
@@ -243,13 +240,13 @@ def main():
     print(f"Total number of parameters: {total_params_M} millions")
 
     # Create dataframes and data_generators
-    train_data, valid_data, test_data = split_df(PATH_train, SEED)
+    train_data, valid_data, test_data = split_df(PATH_data, SEED)
     train_generator, valid_generator, test_generator = data_generators(train_data, valid_data, test_data,
-                                                                       PATH_train, BATCH, target_size, SEED
+                                                                       PATH_data, BATCH, target_size, SEED
                                                                        )
     # Set a path to save best weights and create Callbacks list
     name_weight = f'model_{total_params_M}M_{KERNEL}x{KERNEL}'
-    weight_path = f'Training_model/models_weights/{name_weight}.hdf5'
+    weight_path = f'models_weights/{name_weight}.hdf5'
     callbacks_list = callback_list(weight_path)
 
     # Model compiling

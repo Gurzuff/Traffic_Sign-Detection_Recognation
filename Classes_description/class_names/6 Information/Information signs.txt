@@ -1,0 +1,58 @@
+6.1.svg|General maximum speed limits
+6.2-50.svg|Recommended speed
+6.3.1.svg|Place for a U-turn
+6.3.2.svg|The area for a U-turn
+6.4 A.svg|Parking (parking space)
+6.5.svg|Emergency stop lane
+6.6.svg|Underground pedestrian crossing
+6.7.svg|Above ground pedestrian crossing
+6.8.1.svg|Deadlock
+6.8.2.svg|Deadlock
+6.8.3.svg|Deadlock
+6.9.1 A.svg|Preliminary direction indicator
+6.9.1 B.svg|Preliminary direction indicator
+6.9.1 C.svg|Preliminary direction indicator
+6.9.1 D.svg|Preliminary direction indicator
+6.9.1 E.svg|Preliminary direction indicator
+6.9.2 A.svg|Preliminary direction indicator
+6.9.2 B.svg|Preliminary direction indicator
+6.9.2 C.svg|Preliminary direction indicator
+6.9.3.svg|Traffic scheme
+6.10.1 A.svg|Direction indicator
+6.10.1 B.svg|Direction indicator
+6.10.1 C.svg|Direction indicator
+6.10.1 D.svg|Direction indicator
+6.10.1 E.svg|Direction indicator
+6.10.2 A.svg|Direction indicator
+6.10.2 B.svg|Direction indicator
+6.11 A.svg|Name of the object
+6.11 B.svg|Name of the object
+6.11 C.svg|Name of the object
+6.12 A.svg|Distance indicator
+6.12 B.svg|Distance indicator
+6.12 C.svg|Distance indicator
+6.13 A.svg|Kilometer sign
+6.13 B.svg|Kilometer sign
+6.13 C.svg|Kilometer sign ([[Rosavtodor]])
+6.14.1 A.svg|Route number
+6.14.1 B.svg|Route number
+6.14.1 C.svg|Route number
+6.14.1 D.svg|Route number
+6.14.2 A.svg|Route number
+6.14.2 B.svg|Route number
+6.14.2 C.svg|Route number
+6.15.1.svg|Direction of movement for trucks
+6.15.2.svg|Direction of movement for trucks
+6.15.3.svg|Direction of movement for trucks
+6.16.svg|[[Stop line]]
+6.17.svg|Detour scheme
+6.18.1.svg|Detour direction
+6.18.2.svg|Detour direction
+6.18.3.svg|Detour direction
+6.19.1.svg|Preliminary index of the lane change to another carriageway
+6.19.2.svg|Preliminary index of the lane change to another carriageway
+6.20.1.svg|Emergency exit
+6.20.2.svg|Emergency exit
+6.21.1.svg|Direction of movement to the emergency exit
+6.21.2.svg|Direction of movement to the emergency exit
+6.22.svg|Photovideofixation

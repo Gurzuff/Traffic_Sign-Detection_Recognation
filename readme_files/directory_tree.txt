@@ -1,0 +1,39 @@
+.
+|   .gitattributes
+|   EDA.ipynb
+|   README.md       
++---Classes_description
+|   |   sign_names.csv
+|   |   sign_names_csv.py
+|   +---class_labels  		(200 png files)
+|   \---class_names		(200 class names)  
++---Data
+|   |   segmentation.py
+|   +---raw_images		(13 JPG images)
+|   +---segmented_images	(13 JPG images)
+|   \---segmented_signs
+|       +---model_32		(13 folders)
+|       +---model_48		(13 folders)
+|       \---model_64		(13 folders)
++---Inference_model
+|   |   inference_model.py
+|   +---model_43M_32x32_9966	(13 JPG images)
+|   +---model_43M_64x64_9984	(13 JPG images)
+|   \---model_85M_48x48_9957	(13 JPG images)
++---readme_files   		(files for README.md)
++---Testing_results
+|   |   testing_model.py
+|   +---model_43M_32x32_9966	(confusion matrix: png files)
+|   +---model_43M_64x64_9984	(confusion matrix: png files)
+|   \---model_85M_48x48_9957	(confusion matrix: png files)
+\---Training_model
+    |   training_model.py
+    +---classes
+    |   |   mymodel.py
+    +---evaluate_metrics	(3 png files)
+    +---models_weights		(3 hdf5 files)  
+    +---split_dfs		(4 csv files) 
+    \---test_generator_params	(3 pkl files)
+
+
+

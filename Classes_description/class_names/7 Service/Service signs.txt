@@ -1,0 +1,22 @@
+7.1.svg|Point of medical care
+7.2.svg|Hospital
+7.3.svg|Gas station
+7.4.svg|Vehicle maintenance
+7.5.svg|Car washing
+7.6.svg|Phone
+7.7.svg|Food point
+7.8.svg|Drinking water
+7.9.svg|Hotel or motel
+7.10.svg|Camping
+7.11.svg|Place of rest
+7.12.svg|Traffic police post
+7.13.svg|Police
+7.14.2.svg|Transport control point
+File:7.14.1 Russian road sign.svg|Customs control point
+7.15.svg|Reception area of a radio station transmitting traffic information
+7.16.svg|Radio communication area with emergency services
+7.17.svg|Pool or beach
+7.18.svg|Toilet
+7.19.svg|Emergency telephone number
+7.20.svg|Fire extinguisher
+7.21.svg|Gas station with possibility of charging electric vehicles

@@ -1,0 +1,70 @@
+5.1.svg|Motorway
+5.2.svg|End of motorway
+5.3.svg|Road for cars
+5.4.svg|End of road for cars
+5.5.svg|One-way road
+5.6.svg|End of one-way road
+5.7.1.svg|Exit to a one-way road
+5.7.2.svg|Exit to a one-way road
+5.8.svg|Reversible lane
+5.9.svg|End of reversible lane
+5.10.svg|Reversible lane
+5.11.1.svg|Road with a contraflow bus lane
+5.11.2.svg|Road with a contraflow cycle lane
+5.12.1.svg|End of road with a contraflow bus lane
+5.12.2.svg|End of road with a contraflow cycle lane
+5.13.1.svg|Exit to road with a contraflow bus lane
+5.13.2.svg|Exit to road with a contraflow bus lane
+5.13.3.svg|Exit to road with a contraflow cycle lane
+5.13.4.svg|Exit to road with a contraflow cycle lane
+5.14.1.svg|Bus lane
+5.14.2.svg|Cycle lane
+5.14.3.svg|End of bus lane
+5.14.4.svg|End of cycle lane
+5.15.1.svg|Lane directions
+5.15.2 A.svg|Lane directions
+5.15.2 B.svg|Lane directions
+5.15.2 C.svg|Lane directions
+5.15.2 D.svg|Lane directions
+5.15.2 E.svg|Lane directions
+5.15.3 A.svg|The beginning of the lane
+5.15.3 B.svg|The beginning of the lane
+5.15.3 C.svg|The beginning of the lane
+5.15.4 A.svg|The beginning of the lane
+5.15.4 B.svg|The beginning of the lane
+5.15.5.svg|End of the lane
+5.15.6.svg|End of the lane
+5.15.7 A.svg|Lane direction
+5.15.7 B.svg|Lane direction
+5.15.7 C.svg|Lane direction
+5.15.8.svg|Number of lanes
+5.16.svg|Bus and/or trolleybus stop location
+5.17.svg|Tram stop location
+5.18.svg|Parking place for passenger taxis
+5.19.2.svg|Pedestrian crossing
+5.19.1.svg|Pedestrian crossing
+5.20.svg|Speed bump
+5.21.svg|Residential area
+5.22.svg|End of residential area
+5.23.1.svg|Locality begins
+5.23.2.svg|Built-up area begins
+5.24.1.svg|End of locality
+5.24.2.svg|End of built-up area
+5.25.svg|Locality begins
+5.26.svg|End of locality
+5.27.svg|No parking zone
+5.28.svg|End of no parking zone
+5.29.svg|Regulated parking zone
+5.30.svg|End of the regulated parking zone
+5.31.svg|Maximum speed limit zone
+5.32.svg|End of maximum speed limit zone
+5.33.svg|Pedestrian zone
+5.34.svg|End of pedestrian zone
+5.35.svg|Zone with restriction of ecological class of motor vehicles
+5.36.svg|End of zone with restriction of ecological class of motor vehicles
+5.37 A.svg|Zone with restriction of ecological class of trucks
+5.37 B.svg|Zone with restriction of ecological class of trucks
+5.38 A.svg|End of zone restriction of ecological class of trucks
+5.38 B.svg|End of zone restriction of ecological class of trucks
+5.39.svg|Cycle zone
+5.40.svg|End of cycle zone

@@ -1,0 +1,52 @@
+1.1.svg|Railway crossing with a barrier
+1.2.svg|Railway crossing without a barrier
+1.3.1.svg|Single-track railway
+1.3.2.svg|Multi-track railway
+1.4.1.svg|Approaching a railway crossing
+1.4.2.svg|Approaching a railway crossing
+1.4.3.svg|Approaching a railway crossing
+1.4.4.svg|Approaching a railway crossing
+1.4.5.svg|Approaching a railway crossing
+1.4.6.svg|Approaching a railway crossing
+1.5.svg|Tramway crossing
+1.6.svg|Intersection of equivalent roads
+1.7.svg|Roundabout
+1.8.svg|Traffic signals
+1.9.svg|Drawbridge
+1.10.svg|Exit to an embankment
+1.11.1.svg|Dangerous curve
+1.11.2.svg|Dangerous curve
+1.12.1.svg|Dangerous curves
+1.12.2.svg|Dangerous curves
+1.13.svg|Steep descent
+1.14.svg|Steep ascent
+1.15.svg|Slippery road
+1.16.svg|Rough road
+1.17.svg|Speed bump
+1.18.svg|Gravel surface
+1.19.svg|Dangerous roadside
+1.20.1.svg|Road narrowing
+1.20.2.svg|Road narrowing
+1.20.3.svg|Road narrowing
+1.21.svg|Two-way traffic
+1.22.svg|Pedestrian crossing
+1.23.svg|Children
+1.24.svg|Bicycle path intersection
+1.25.svg|Roadworks
+1.26.svg|Cattle
+1.27.svg|Wild animals
+1.28.svg|Rockfall
+1.29.svg|Crosswind
+1.30.svg|Low-flying aircraft
+1.31.svg|Tunnel
+1.32.svg|Congestion
+1.33.svg|Other hazards
+1.34.1 A.svg|Hazard chevron
+1.34.1 B.svg|Hazard chevron
+1.34.1 C.svg|Hazard chevron
+1.34.2 A.svg|Hazard chevron
+1.34.2 B.svg|Hazard chevron
+1.34.2 C.svg|Hazard chevron
+1.34.3 A.svg|Hazard chevron
+1.34.3 B.svg|Hazard chevron
+File:1.35 Russian road sign.svg|Box junction
