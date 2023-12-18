@@ -1,7 +1,4 @@
 # Default ignored files
-/shelf/
-/workspace.xml
 .idea/
-venv_tf_gpu/
-temp/
 .ipynb_checkpoints/
+venv_tf_gpu/
