@@ -6,7 +6,7 @@ from detectron2.engine import DefaultPredictor
 from detectron2.data import MetadataCatalog
 from detectron2.utils.visualizer import Visualizer
 
-def sign_segmentation(instances, metadata, im, prob_threshold=0.5, segm_size=64):
+def sign_segmentation(instances, metadata, im, segment_size, prob_threshold=0.5):
     '''
     Segments signs on the image.
     Parameters:
@@ -14,7 +14,7 @@ def sign_segmentation(instances, metadata, im, prob_threshold=0.5, segm_size=64)
     - metadata: Metadata containing information about object classes and additional details.
     - im: Input image for segmentation.
     - prob_threshold: Probability threshold for "street_sign" class detection.
-    - segm_size: Size to which the sign segments are resized (default is 64x64).
+    - segment_size: Size to which the sign segments are resized (default is 64x64).
     Returns a list of segmented sign images.
     '''
     # Get indexes of segments corresponding to the "human" class and exceeding the probability threshold
@@ -32,14 +32,14 @@ def sign_segmentation(instances, metadata, im, prob_threshold=0.5, segm_size=64)
             x_delta = (x_max - x_min) * 0.1
             y_delta = (y_max - y_min) * 0.1
             im_seg = im[int(y_min - y_delta):int(y_max + y_delta), int(x_min - x_delta):int(x_max + x_delta)]
-            im_seg = cv2.resize(im_seg, (segm_size, segm_size))
+            im_seg = cv2.resize(im_seg, (segment_size, segment_size))
             segmented_signs.append(im_seg)
 
     return segmented_signs
 
 # CUSTOM PARAMETERS
 # shape of segmented signs: [32, 48, 64]
-sign_size = 32
+SIZE = 32
 # threshold of probability for segmentation traffic signs
 segment_threshold = 0.45
 # path test images folder
@@ -92,12 +92,12 @@ def main():
         instances = outputs["instances"].to(DEVICE)
 
         # Get segmented signs
-        segmented_signs = sign_segmentation(instances, metadata, image, prob_threshold=segment_threshold, segm_size=sign_size)
+        segmented_signs = sign_segmentation(instances, metadata, image, segment_size=SIZE, prob_threshold=segment_threshold)
 
         # Save segmented signs
         for i, segmented_sign in enumerate(segmented_signs):
-            os.makedirs(f'segmented_signs/model_{sign_size}/{file}', exist_ok=True)
-            cv2.imwrite(f'segmented_signs/model_{sign_size}/{file}/sign_{i}.png', segmented_sign)
+            os.makedirs(f'segmented_signs/model_{SIZE}/{file}', exist_ok=True)
+            cv2.imwrite(f'segmented_signs/model_{SIZE}/{file}/sign_{i}.png', segmented_sign)
 
         print(f'{len(segmented_signs)} traffic signs segmented from {file}')
 

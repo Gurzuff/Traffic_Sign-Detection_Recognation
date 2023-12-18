@@ -48,7 +48,7 @@ def save_conf_matrix(y_true, y_pred, name_weight):
         plt.xlabel('Predicted')
         plt.ylabel('True')
         plt.title(f'Confusion Matrix part_{i+1}')
-        plt.savefig(f'{name_weight}/Confusion Matrix part_{i+1}')
+        plt.savefig(f'confusion_matrices/{name_weight}/Confusion Matrix part_{i+1}')
         i += c_m_size
 
 # CUSTOM PARAMETERS
