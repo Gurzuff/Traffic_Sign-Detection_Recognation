@@ -113,6 +113,19 @@ Models were trained for different input road sign shapes: [32x32, 48x48, 64x64]
      * "**model**": [MyModel_32, MyModel_48, MyModel_64]
    * Run **inference_model.py**
 
+## Deployment Inference with Docker
+Pull the Docker Image:
+* docker pull your-docker-username/your-image-name:your-tag
+
+Run the Docker Container:
+* docker run -it --rm -v /local/path:/app/Inference_model/inference_docker docker_image
+
+your-docker-username: Your Docker Hub username.
+your-image-name: The name of your Docker image.
+your-tag: The specific tag of your Docker image.
+
+Ensure to replace /local/path with the local directory where you want to store the inference results.
+
 ## Segmentation
 The [Detectron2](https://github.com/facebookresearch/detectron2/blob/main/MODEL_ZOO.md)
 (from facebookresearch) was used to segment road signs from general images.
@@ -122,7 +135,7 @@ The [Detectron2](https://github.com/facebookresearch/detectron2/blob/main/MODEL_
 
 * ![](readme_files/Segmented_Image.png)
 
-## Environment (... in progress ...)
+## Environment
 For training on a video card, I used [tensorflow-gpu==2.10.0](https://www.tensorflow.org/install/source_windows). To install this library, you must use the following auxiliary tools:
    * [Bazel 5.1.1](https://github.com/bazelbuild/bazel/releases?q=5.1.1&expanded=true)
    * [cuDNN](https://developer.nvidia.com/rdp/cudnn-archive)
