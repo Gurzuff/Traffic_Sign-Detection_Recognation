@@ -7,6 +7,7 @@ from matplotlib.gridspec import GridSpec, GridSpecFromSubplotSpec
 
 from Training_model.classes.mymodel import MyModel_32, MyModel_48, MyModel_64
 
+
 def final_image(PATH_labels, PATH_signs, img_segmented, name_img, y_pred, y_prob, threshold=0.4):
     '''
     Creates a composite image displaying the original segmented image and segmented signs.

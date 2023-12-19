@@ -12,11 +12,11 @@ More than 95% of road signs in post-Soviet countries are identical, so you can u
 ![](readme_files/Traffic_signs_in_post_Soviet_states.png)
 
 ## Data
-The dataset (prepared myself) contains 200 classes, 117.000 images and was also publicly available on Kaggle:
+The dataset (prepared by myself) contains 200 classes, 117.000 images and was also publicly available on Kaggle:
 https://www.kaggle.com/datasets/mikhailkosov/traffic-signs-in-post-soviet-states-200-classes
 
-The imbalance of classes is justified by the complexity of the structure and the variety of forms of 
-road signs, on the one hand, and vice versa - simple and uniform form on the other hand.
+The imbalance of classes is explained by the complexity of the structure and the variety of forms of 
+road signs, on the one hand, and vice versa - simplicity and uniform on the other hand.
 
 **More details in [EDA.ipynb](EDA.ipynb)**
 
@@ -52,7 +52,7 @@ Models were trained for different input road sign shapes: [32x32, 48x48, 64x64]
 ## Project Structure
 - **EDA.ipynb**: Exploratory Data Analysis
 - **Data/segmentation.py**: 
-  - Uses [Detectron2](https://github.com/facebookresearch/detectron2/blob/main/MODEL_ZOO.md) for segmentation road signs in general images:
+  - Uses [Detectron2](https://github.com/facebookresearch/detectron2/blob/main/MODEL_ZOO.md) for segmentation of road signs in general images:
   - Uses [Data/raw_images/](Data/raw_images) - general images;
   - Prepares [Data/segmented_images/](Data/segmented_images) - segmented road signs on general image;
   - Prepares [Data/segmented_signs/](Data/segmented_signs) - cut out road signs;
