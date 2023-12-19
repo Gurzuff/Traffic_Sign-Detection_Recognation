@@ -60,7 +60,7 @@ def final_image(PATH_labels, PATH_signs, img_segmented, name_img, y_pred, y_prob
             ax_small.axis('off')
 
     plt.tight_layout()
-    plt.savefig(f'Inference_model/inference_docker/{name_img}')
+    plt.savefig(f'inference_docker/{name_img}')
 
 # CUSTOM PARAMETERS
 CLASSES = 200
@@ -85,7 +85,7 @@ df_classes = pd.read_csv('data/sign_names.csv')
 
 def main():
     # Create a folder to save final classified road sign images
-    os.makedirs(f'Inference_model/inference_docker', exist_ok=True)
+    os.makedirs(f'inference_docker', exist_ok=True)
 
     # Go through all the test images
     for name_img in os.listdir(PATH_segmented_images):

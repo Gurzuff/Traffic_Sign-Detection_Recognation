@@ -114,17 +114,15 @@ Models were trained for different input road sign shapes: [32x32, 48x48, 64x64]
    * Run **inference_model.py**
 
 ## Deployment Inference with Docker
-Pull the Docker Image:
-* docker pull your-docker-username/your-image-name:your-tag
+At the moment, it only allows you to compare the final image with segmented road signs and the predictions made 
+for each sign (all images are taken from the folders: "Data/segmented_images" and "Data/segmented_signs"
 
-Run the Docker Container:
-* docker run -it --rm -v /local/path:/app/Inference_model/inference_docker docker_image
+1. Pull the Docker Image:
+   * docker pull gurzuff/road_sign_classification:latest
+2. Run the Docker Container:
+   * docker run --rm -v /local/path:/app/inference_docker gurzuff/road_sign_classification:latest
 
-your-docker-username: Your Docker Hub username.
-your-image-name: The name of your Docker image.
-your-tag: The specific tag of your Docker image.
-
-Ensure to replace /local/path with the local directory where you want to store the inference results.
+!Ensure to replace "**/local/path**" with the local directory where you want to store the inference results.
 
 ## Segmentation
 The [Detectron2](https://github.com/facebookresearch/detectron2/blob/main/MODEL_ZOO.md)

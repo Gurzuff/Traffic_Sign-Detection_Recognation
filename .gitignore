@@ -2,4 +2,3 @@
 .idea/
 .ipynb_checkpoints/
 venv_tf_gpu/
-#Docker/
