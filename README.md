@@ -86,7 +86,7 @@ Models were trained for different input road sign shapes: [32x32, 48x48, 64x64]
 - **docker_requirements.txt**: List of required Python modules for deployment docker image
 - **Dockerfile**: Create docker image for model inference
 
-![](readme_files/Project_structure.PNG)
+![](readme_files/Project_structure_.PNG)
 
 ## How to RUN
 1) Preparing data
