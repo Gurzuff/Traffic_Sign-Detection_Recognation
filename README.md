@@ -142,7 +142,7 @@ For training on a video card, I used [tensorflow-gpu==2.10.0](https://www.tensor
 ![](readme_files/enviroment.png)
 
 ## Next stages of development
-
+0. Expand dockerization
 1. Retrain the detectron2 model to improve road sign detection: 
     * Sign "End of the priority road" - not detected;
 2. Add a text/character recognition model for more accurate character classification:

@@ -1,6 +1,8 @@
 .
 |   .gitattributes
 |   requirements.txt
+|   docker_requirements.txt
+|   Dockerfile
 |   EDA.ipynb
 |   README.md       
 +---Classes_description
@@ -18,6 +20,7 @@
 |       \---model_64	    	(13 folders)
 +---Inference_model
 |   |   inference_model.py
+|   |   docker_inference_model.py
 |   +---model_43M_32x32_9966	(13 JPG images)
 |   +---model_43M_64x64_9984	(13 JPG images)
 |   \---model_85M_48x48_9957	(13 JPG images)
