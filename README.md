@@ -83,6 +83,8 @@ Models were trained for different input road sign shapes: [32x32, 48x48, 64x64]
 - **readme_files/** - folder with images for the file **README.md**
 - **.gitattributes**: list of the LFS files (model weights)
 - **requirements.txt**: List of required Python modules
+- **docker_requirements.txt**: List of required Python modules for deployment docker image
+- **Dockerfile**: Create docker image for model inference
 
 ![](readme_files/Project_structure.PNG)
 
