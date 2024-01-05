@@ -8,7 +8,13 @@ from matplotlib.gridspec import GridSpec, GridSpecFromSubplotSpec
 from Training_model.classes.mymodel import MyModel_32, MyModel_48, MyModel_64
 
 
-def final_image(PATH_labels, PATH_signs, img_segmented, name_img, y_pred, y_prob, threshold=0.4):
+def final_image(PATH_labels: str,
+                PATH_signs: str,
+                img_segmented: Image.Image,
+                name_img: str,
+                y_pred: list[int],
+                y_prob: list[float],
+                threshold: float = 0.4) -> None:
     '''
     Creates a composite image displaying the original segmented image and segmented signs.
     Parameters:
@@ -19,7 +25,7 @@ def final_image(PATH_labels, PATH_signs, img_segmented, name_img, y_pred, y_prob
     - y_pred: Predicted classes for segmented signs.
     - y_prob: Predicted probabilities for segmented signs.
     - threshold: Probability threshold for displaying meta images.
-    Saves the resulting composite image.
+    Saves the resulting composite image to the folder with "model_weights" names.
     '''
     # Create a figure with a specific layout for images (4 - big, 1 - small)
     fig = plt.figure(figsize=(18, 6))

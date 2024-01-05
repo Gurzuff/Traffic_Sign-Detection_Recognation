@@ -1,9 +1,10 @@
 import os
 import pandas as pd
 
+# Function for create the 'sign_names.csv' file
 def main():
-    # Directory of full sign names for each classes
     class_list = []
+    # Directory of full sign names for each classes
     PATH_data = 'class_names'
     for root, dirs, full_name_group in os.walk(PATH_data):
         for subdir in dirs:

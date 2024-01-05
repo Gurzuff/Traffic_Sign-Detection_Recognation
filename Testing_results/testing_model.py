@@ -11,7 +11,9 @@ from sklearn.metrics import accuracy_score
 
 from Training_model.classes.mymodel import MyModel_32, MyModel_48, MyModel_64
 
-def save_conf_matrix(y_true, y_pred, name_weight):
+def save_conf_matrix(y_true: list[int],
+                     y_pred: list[int],
+                     name_weight: str) -> None:
     '''
     Generates and saves confusion matrices for the classification results.
     Parameters:

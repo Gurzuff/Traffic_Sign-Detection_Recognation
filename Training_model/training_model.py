@@ -9,9 +9,10 @@ from keras.optimizers import RMSprop
 from keras.callbacks import Callback, EarlyStopping, ModelCheckpoint, ReduceLROnPlateau
 from sklearn.model_selection import train_test_split
 
+from typing import Generator, Union, Dict
 from classes.mymodel import MyModel_32, MyModel_48, MyModel_64
 
-def split_df(PATH_data, SEED):
+def split_df(PATH_data: str, SEED: int) -> (pd.DataFrame, pd.DataFrame, pd.DataFrame):
     '''
     Splits a dataset into training, validation, and test sets based on image paths and class IDs.
     Parameters:
@@ -47,7 +48,13 @@ def split_df(PATH_data, SEED):
 
     return train_data, valid_data, test_data
 
-def data_generators(train_data, valid_data, test_data, PATH_train, BATCH, target_size, SEED):
+def data_generators(train_data: pd.DataFrame,
+                    valid_data: pd.DataFrame,
+                    test_data: pd.DataFrame,
+                    PATH_train: str,
+                    BATCH: int,
+                    target_size: (int, int),
+                    SEED: int) -> (Generator, Generator, Generator):
     '''
     Creates data generators for training, validation, and testing with augmentation.
     Parameters:
@@ -114,7 +121,11 @@ def data_generators(train_data, valid_data, test_data, PATH_train, BATCH, target
 
     return train_generator, valid_generator, test_generator
 
-def metrics_chart(model, name_weight, test_generator, history, EPOCHS):
+def metrics_chart(model: Union[MyModel_32, MyModel_48, MyModel_64],
+                  name_weight: str,
+                  test_generator: Generator,
+                  history: Dict[str, Union[list[float], list[float]]],
+                  EPOCHS: int) -> None:
     '''
     Plots accuracy and loss metrics for a trained model.
     Parameters:
@@ -173,16 +184,21 @@ class MyEarlyStop(Callback):
     Parameters:
     - threshold: Threshold for validation accuracy to trigger early stopping.
     '''
-    def __init__(self, threshold):
+    def __init__(self, threshold: float):
         super(MyEarlyStop, self).__init__()
         self.threshold = threshold
 
-    def on_epoch_end(self, epoch, logs={}):
+    def on_epoch_end(self, epoch: int, logs: dict = {}) -> None:
         if logs.get('val_accuracy') is not None and logs.get('val_accuracy') >= self.threshold:
             print(f'\nReached {self.threshold * 100}% accuracy!')
             self.model.stop_training = True
 
-def callback_list(weight_path, val_loss="val_loss", mode_min='min', val_accur='val_accuracy', mode_max='max', threshold=0.999):
+def callback_list(weight_path: str,
+                  val_loss: str = "val_loss",
+                  mode_min: str = 'min',
+                  val_accur: str = 'val_accuracy',
+                  mode_max: str = 'max',
+                  threshold: float = 0.999):
     '''
     Creates a list of callbacks for model training.
     Parameters:
